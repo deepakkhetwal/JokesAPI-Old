@@ -24,6 +24,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
 app.get('/jokes', jokes.index);
 app.post('/jokes/create', jokes.create);
 app.delete('/jokes/delete', jokes.delete);
@@ -36,13 +41,11 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-var debug = require('debug')('my-application');
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-});
+
 /// error handlers
 
 // development error handler
+
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
