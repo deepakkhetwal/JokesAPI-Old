@@ -10,8 +10,11 @@ exports.index = function(req,res)
 
 exports.create = function(req, res)
 {
+	
 	var newJoke = new jokeEntity();
 	newJoke.description = req.body.Description;
+	newJoke.joke_category = req.body.joke_category;
+	newJoke.user_email = req.body.user_email;
 	newJoke.save(function(err)
 	{
 		if(!err)
