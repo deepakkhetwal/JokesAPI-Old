@@ -2,7 +2,7 @@ var jokeEntity = require('../Models/jokeEntity').Joke;
 exports.index = function(req,res)
 {
 	//res.json(200, {Message: "hello"});
-	jokeEntity.find({}, function(err, docs){
+	jokeEntity.find({is_reviewed: "Y"}, function(err, docs){
 		if(!err){ res.json(200, {jokes: docs});}
 		else{ res.json(500, {message: err});}
 	}) ; 
