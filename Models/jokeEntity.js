@@ -5,7 +5,7 @@ var jokeSchema = new schema({
     description : { type: String, required: 'Joke description is required'}
   , user_email : {type: String}
   , joke_category : {type: String}
-  , is_reviewed : {type:String, default: false}
+  , is_reviewed : {type:Boolean, default: false}
   , date_created : { type: Date, required: true, default: Date.now}
 
 });
