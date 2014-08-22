@@ -9,8 +9,10 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var jokes = require('./routes/jokes');
 var admnReview = require('./routes/admn/review');
-mongoose.connect('mongodb://localhost/JokesDB');
-//mongoose.connect('mongodb://nodejitsu:a9acd5b96ae4a21ddb4955da8774d0aa@troup.mongohq.com:10031/nodejitsudb7904070897');
+//mongoose.connect('mongodb://localhost/JokesDB');
+//mongoose.connect('mongodb://nodejitsu:a9acd5b96ae4a21ddb4955da8774d0aa@troup.mongohq.com:10031/nodejitsudb7904070897'); mongohq
+//mongolab below
+mongoose.connect('mongodb://jokesapi_app:Remson!123@ds063869.mongolab.com:63869/heroku_app28755319');
 var app = express();
 
 // view engine setup

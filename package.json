@@ -1,6 +1,6 @@
 {
-  "name": "application-name",
-  "version": "0.0.1-4",
+  "name": "kejokesapi",
+  "version": "0.0.1-6",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -14,6 +14,9 @@
     "mongoose": "^3.8.12",
     "morgan": "~1.0.0",
     "static-favicon": "~1.0.0"
+  },
+  "subdomain": "kejokesapi",
+  "engines": {
+    "node": "0.10.29"
   }
-  
 }
