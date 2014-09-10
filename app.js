@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var jokes = require('./routes/jokes');
+var feedbacks = require('./routes/feedback');
 var admnReview = require('./routes/admn/review');
 //mongoose.connect('mongodb://localhost/JokesDB');
 //mongoose.connect('mongodb://nodejitsu:a9acd5b96ae4a21ddb4955da8774d0aa@troup.mongohq.com:10031/nodejitsudb7904070897'); mongohq
@@ -47,6 +48,9 @@ app.put('/jokes/update', jokes.update);
 
 app.get('/admn/review', admnReview.index);
 app.put('/admn/review/update', admnReview.update);
+
+app.post('/feedbacks/create', feedbacks.create);
+
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
