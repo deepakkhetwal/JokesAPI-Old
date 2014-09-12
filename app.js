@@ -45,7 +45,7 @@ app.get('/jokes', jokes.index);
 app.post('/jokes/create', jokes.create);
 app.delete('/jokes/delete', jokes.delete);
 app.put('/jokes/update', jokes.update);
-app.post('/jokes/postlikes', jokes.postLikes); 
+app.post('/jokes/createlike', jokes.createLike); 
 app.get('/admn/review', admnReview.index);
 app.put('/admn/review/update', admnReview.update);
 

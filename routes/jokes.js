@@ -62,7 +62,7 @@ exports.update = function(req, res)
 
 }
 
-exports.postLikes = function(req, res)
+exports.createLike = function(req, res)
 {
 	var id = req.body.id;
 	var is_liked = req.body.is_liked;
