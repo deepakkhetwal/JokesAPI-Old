@@ -7,13 +7,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var jokes = require('./routes/jokes');
-var feedbacks = require('./routes/feedback');
-var admnReview = require('./routes/admn/review');
+
 //mongoose.connect('mongodb://localhost/JokesDB');
 //mongoose.connect('mongodb://nodejitsu:a9acd5b96ae4a21ddb4955da8774d0aa@troup.mongohq.com:10031/nodejitsudb7904070897'); mongohq
 //mongolab below
-mongoose.connect('mongodb://jokesapi_app:Remson!123@ds063869.mongolab.com:63869/heroku_app28755319');
+mongoose.connect(require('./appConfig.js').connectionString);
 var app = express();
 
 // view engine setup
@@ -24,6 +22,7 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -41,15 +40,8 @@ app.all('*', function(req, res, next) {
 app.options('*', function(req, res) {
     res.send(200);
 });
-app.get('/jokes', jokes.index);
-app.post('/jokes/create', jokes.create);
-app.delete('/jokes/delete', jokes.delete);
-app.put('/jokes/update', jokes.update);
-app.put('/jokes/createlike', jokes.createLike); 
-app.get('/admn/review', admnReview.index);
-app.put('/admn/review/update', admnReview.update);
 
-app.post('/feedbacks/create', feedbacks.create);
+require('./mapRoutes').mappings(app);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
