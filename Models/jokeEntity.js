@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var likeSchema = new schema({
 	is_liked : {type:Boolean}
+  ,date_created : {type: Date, required: true, default: Date.now}
 
 });
 
