@@ -28,4 +28,23 @@ exports.uploadJokesImage = function(req,res)
 		});
 	
   	
-} 
+} ;
+
+
+//crud.js file
+exports.downloadJokes = function(req, res){
+
+	var mongoose = require('mongoose');
+
+	var Grid = require('gridfs-stream');
+     // res.json(200, req.params.name);
+	var conn = mongoose.createConnection(require('../appConfig').connectionString);
+	conn.once('open', function () {
+	var gfs = Grid(conn.db, mongoose.mongo);
+	var file = req.params.name;
+	//res.set('Content-Type', 'image/jpeg');
+    var readstream = gfs.createReadStream(file);
+    readstream.pipe(res);
+	   }); 
+
+   	};

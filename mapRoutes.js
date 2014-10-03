@@ -14,6 +14,7 @@ function mappings(app)
 
 	app.post('/feedbacks/create', feedbacks.create);
 	app.post('/uploadjokesimage', jokesUpload.uploadJokesImage);
+	app.get('/download/:name', jokesUpload.downloadJokes);
 	
 };
 
