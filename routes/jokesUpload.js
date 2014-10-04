@@ -33,7 +33,7 @@ exports.uploadJokesImage = function(req,res)
 
 //crud.js file
 exports.downloadJokes = function(req, res){
-
+ 
 	var mongoose = require('mongoose');
 
 	var Grid = require('gridfs-stream');
@@ -42,8 +42,8 @@ exports.downloadJokes = function(req, res){
 	conn.once('open', function () {
 	var gfs = Grid(conn.db, mongoose.mongo);
 	var file = req.params.name;
-	//res.set('Content-Type', 'image/jpeg');
-    var readstream = gfs.createReadStream(file);
+	res.set('Content-Type', 'image/jpeg');
+    var readstream = gfs.createReadStream({_id: req.params.name});
     readstream.pipe(res);
 	   }); 
 
