@@ -1,12 +1,18 @@
 var jokeEntity = require('../Models/jokeEntity').Joke;
+
+var jokesBLL = require('../bll/jokes').jokesBLL;
 exports.index = function(req,res)
 {
-	//res.json(200, {Message: "hello"});
-	
+	//res.json(200, {Message: req.ip});
+	//res.json(200, jokesBLL.getJokes(jokeEntity));
+	var visitorEntity = require('../Models/visitorEntity').Visitor;
+	var newVisitor = new visitorEntity();
+	newVisitor.ip_address = req.ip;
+	newVisitor.save();
 	jokeEntity.find({is_reviewed: true}, function(err, docs){
 		if(!err){ res.json(200, {jokes: docs});}
 		else{ res.json(500, {message: err});}
-	}) ; 
+	}) ;  
 } 
 
 exports.create = function(req, res)
@@ -76,4 +82,9 @@ exports.createLike = function(req, res)
 			});
 		}
 	});
+}
+
+exports.mostLiked = function(req, res)
+{
+
 }
