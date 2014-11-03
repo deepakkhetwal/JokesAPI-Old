@@ -4,6 +4,7 @@ function mappings(app)
 	var feedbacks = require('./routes/feedback');
 	var admnReview = require('./routes/admn/review');
 	var jokesUpload = require('./routes/jokesUpload');
+	
 	app.get('/jokes', jokes.index);
 	app.post('/jokes/create', jokes.create);
 	app.delete('/jokes/delete', jokes.delete);
@@ -15,7 +16,8 @@ function mappings(app)
 	app.post('/feedbacks/create', feedbacks.create);
 	app.post('/uploadjokesimage', jokesUpload.uploadJokesImage);
 	app.get('/download/:name', jokesUpload.downloadJokes);
-	
+	//app.get('/admin/visitor',)
+	app.get('/jokes/mostliked', jokes.mostLiked);
 };
 
 exports.mappings = mappings;

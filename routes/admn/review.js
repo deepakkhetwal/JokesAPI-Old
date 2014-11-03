@@ -9,7 +9,6 @@ exports.index = function(req, res)
 
 exports.update = function(req, res)
 {
-	
 	var id = req.body.id;
 	var description = req.body.description;
 	var jokeCategory = req.body.jokeCategory;
