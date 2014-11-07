@@ -4,7 +4,7 @@ var jokesBLL = require('../bll/jokes').jokesBLL;
 exports.index = function(req,res)
 {
 	//res.json(200, {Message: req.ip}); 
-	//res.json(200, jokesBLL.getJokes(jokeEntity));
+	res.json(200, jokesBLL.getJokes(jokeEntity));
 	var visitorEntity = require('../Models/visitorEntity').Visitor;
 	var newVisitor = new visitorEntity();
 	newVisitor.ip_address = req.ip;
@@ -16,11 +16,19 @@ exports.index = function(req,res)
 
 	jokeEntity.aggregate( 
 	  [ 
+	  	{$project : {
+	  		_id : 1,
+	  		description : 1,
+	  		is_reviewed : 1,
+	  		likes : { $cond : [ { $eq : [ "$likes", [] ] }, [ { value : null } ], '$likes' ] } 
+
+	  	}},
 	    { $unwind : "$likes" }, 
-	    {$match : {is_reviewed:true}},
+	    {$match : {is_reviewed:true}} ,
 	    { $group : {
 	     	_id: { _id: "$_id", description: "$description" },
-	    	likesCount : { $sum : 1 } } },
+	    	likesCount : { $sum : 1
+	    	} } }, 
 	   
 	  ] , function(err, docs){
 	  	if(!err){ res.json(200, {jokes: docs});}
