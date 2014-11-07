@@ -4,7 +4,7 @@ var jokesBLL = require('../bll/jokes').jokesBLL;
 exports.index = function(req,res)
 {
 	//res.json(200, {Message: req.ip}); 
-	res.json(200, jokesBLL.getJokes(jokeEntity));
+	//res.json(200, jokesBLL.getJokes(jokeEntity));
 	var visitorEntity = require('../Models/visitorEntity').Visitor;
 	var newVisitor = new visitorEntity();
 	newVisitor.ip_address = req.ip;
