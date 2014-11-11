@@ -12,7 +12,6 @@ function mappings(app)
 	app.put('/jokes/createlike', jokes.createLike); 
 	app.get('/admn/review', admnReview.index);
 	app.put('/admn/review/update', admnReview.update);
-
 	app.post('/feedbacks/create', feedbacks.create);
 	//app.post('/upload', jokesUpload.upload);
 	//app.get('/admin/visitor',)
