@@ -24,7 +24,7 @@ exports.update = function(req, res)
 				if(!err){res.json(200,{message : "Updated successfully"})}
 				else{res.json(500, {message: "OOps some error occurred. Please try again later"})}
 
-			});}
+			});} 
 		}
 	); 
 	

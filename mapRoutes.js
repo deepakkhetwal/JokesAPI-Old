@@ -3,6 +3,7 @@ function mappings(app)
 	var jokes = require('./routes/jokes');
 	var feedbacks = require('./routes/feedback');
 	var admnReview = require('./routes/admn/review');
+	var video = require('./routes/video');
 	//var jokesUpload = require('./routes/jokesUpload');
 	
 	app.get('/jokes', jokes.index);
@@ -16,7 +17,11 @@ function mappings(app)
 	//app.post('/upload', jokesUpload.upload);
 	//app.get('/admin/visitor',)
 	app.get('/jokes/mostliked', jokes.mostLiked);
+	app.get('/video/create', video.create);
+	app.get('/video', video.index);
+	app.get('/video/review', video.getVideoForReview);
+	app.put('/video/review/update', video.UpdateVideoAfterReview);
 
 };
 
-exports.mappings = mappings;
+exports.mappings = mappings; 
