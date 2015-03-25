@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 var videoSchema = new schema({
 		file_id : {type: String, required: true},
 		extension : {type: String, required: true},
+		file_loc: {type: String, required:true},
 		title: {type: String},
 		description : {type: String},
 		tags: {type: String},
