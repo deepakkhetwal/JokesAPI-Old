@@ -1,5 +1,6 @@
 var videoEntity = require('../Models/videoEntity').Video;
 var videoAdminDTO = require('../dto/video/video-admin-dto');
+var videoDTO = require('../dto/video/video-dto');
 var awsSDK = require('aws-sdk');
 exports.create = function(req,res)
 {
@@ -31,7 +32,14 @@ exports.index = function(req, res)
 	
 
 	videoEntity.find({}, function(err, docs){
-		if(!err){ res.json(200, {videos: docs});}
+		if(!err){ 
+			var dto = new videoDTO();
+			dto.file_id = null ; // storing file name
+			dto.is_reviewed = null;
+			dto.file_url = 'https://s3-us-west-2.amazonaws.com/elasticbeanstalk-us-west-2-780260980507/' + docs.file_id;
+			dto.extension = docs.extension;
+			res.json(200, {videos: docs});
+		}
 		else{ res.json(500, {message: err});}
 	}) ; 
 
@@ -69,6 +77,7 @@ exports.UpdateVideoAfterReview  = function(req, res)
 				newVideo.description = description;
 				newVideo.tags = tags;
 				newVideo.is_reviewed = isReviewed;
+				newVideo.file_loc = "https://s3-us-west-2.amazonaws.com/elasticbeanstalk-us-west-2-780260980507/";
 				newVideo.save(function(err)
 				{
 					if(!err)
@@ -103,7 +112,7 @@ exports.getVideoForReview = function(req, res)
 	  else 
 	  {
 
-	  		videoEntity.find({}, function(err, docs){
+	  		videoEntity.find({is_reviewed: true}, function(err, docs){
 			if(docs.length <=0 ) // if no records in database return all
 			{
 
@@ -128,7 +137,7 @@ exports.getVideoForReview = function(req, res)
 				res.json(200, {message: objVideoArr });
 			}
 			else
-			{
+			{ 
 				var awsKey = null;
 				var objVideoArr = [];
 				var dto = null;
@@ -154,7 +163,7 @@ exports.getVideoForReview = function(req, res)
 					  		dto.tags = docs[i].tags;
 					  		dto.is_reviewed = docs[i].is_reviewed;
 					  		dto.extension = obj.Key.split('.')[1] ;
-			  				dto.file_url = 'https://s3-us-west-2.amazonaws.com/elasticbeanstalk-us-west-2-780260980507/' + dto.file_id ;
+			  				dto.file_url = docs[i].file_loc + dto.file_id ;
 					  		objVideoArr.push(dto);
 					  		dbItemFound = true;
 
