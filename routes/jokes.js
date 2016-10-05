@@ -20,15 +20,15 @@ exports.index = function(req,res)
 	  		_id : 1,
 	  		description : 1,
 	  		is_reviewed : 1,
-	  		likes : { $cond : [ { $eq : [ "$likes", [] ] }, [ { value : null } ], '$likes' ] } 
+	  		likes : { $cond : [ { $eq : [ "$likes", [] ] }, [], '$likes' ] }
 
 	  	}},
-	    { $unwind : "$likes" }, 
+		{ $unwind: { path: "$likes", preserveNullAndEmptyArrays: true } },
 	    {$match : {is_reviewed:true}} ,
 	    { $group : {
 	     	_id: { _id: "$_id", description: "$description" },
 	    	likesCount : { $sum : 1
-	    	} } }, 
+	    	} } }
 	   
 	  ] , function(err, docs){
 	  	if(!err){ res.json(200, {jokes: docs});}
