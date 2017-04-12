@@ -4,10 +4,14 @@
   "description": "api for kidslaughs.com",
   "main": "index.js",
   "dependencies": {
+    "config": "^1.25.1",
     "koa": "^2.1.0",
-    "koa-66": "^1.0.1"
+    "koa-66": "^1.0.1",
+    "mongodb": "^2.2.25"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^3.18.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
